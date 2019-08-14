@@ -9,10 +9,12 @@ namespace ControlStock.Web.Controllers
     public class ReportingController : Controller
     {
         // GET: Reporting
+        [Authorize]
         public ActionResult InventoryPosition()
         {
             return View();
         }
+        [Authorize]
         public ActionResult Resupply()
         {
             return View();

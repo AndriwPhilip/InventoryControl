@@ -9,10 +9,12 @@ namespace ControlStock.Web.Controllers
     public class GraphicsController : Controller
     {
         // GET: Graphics
+        [Authorize]
         public ActionResult LossesPerMonth()
         {
             return View();
         }
+        [Authorize]
         public ActionResult InputVsOutputPerMonth()
         {
             return View();
