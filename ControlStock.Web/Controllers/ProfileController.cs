@@ -26,7 +26,7 @@ namespace ControlStock.Web.Controllers
                 return View(login);
             }
 
-            var achou = (login.User == "andriw" && login.Password == "123");
+            var achou = UserModel.ValidateUser(login.User, login.Password);
 
             if(achou)
             {
