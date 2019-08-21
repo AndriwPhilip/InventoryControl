@@ -1,3 +1,147 @@
-﻿
-<h2>Grupo Produto</h2>
+﻿@model List<ControlStock.Web.Models.ProductGroupModel>
+@{
+    ViewBag.Title = "Cadastro de Grupo de Produtos";
+}
+<style>
+    #registrer_grid > thead > tr th:nth-child(2) {
+        width: 110px;
+    }
+
+    #registrer_grid > thead > tr th:nth-child(3) {
+        width: 200px;
+    }
+
+    #registrer {
+        width: 70%;
+        margin: 0 auto;
+    }
+
+    #registrer_cabecalho {
+        border-bottom: 1px #dddddd solid;
+    }
+
+    #registrer_contend {
+        margin-top: 20px;
+    }
+
+    #cabecalho_grid {
+        margin-bottom: 20px;
+    }
+
+    .invisivel {
+        display: none;
+    }
+</style>
+
+
+<div id="registrer">
+    <section id="registrer_cabecalho">
+        <h1>@ViewBag.Title</h1>
+    </section>
+    <section id="registrer_contend">
+        <div id="cabecalho_grid" class="row">
+            <div class="col-md-12">
+                <a id="btn_include" class="btn btn-success" role="button"><i class="glyphicon glyphicon-plus">Incluir</i></a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <table id="registrer_grid" class="table table-bordered table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Ativo</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr data-id="@item.Id">
+                                <td>@item.Name</td>
+                                <td>@{var active = (item.Active ? "SIM" : "NÃO");}@active</td>
+                                <td>
+                                    <a class="btn btn-primary btn-change" role="button"><i class="glyphicon glyphicon-pencil"></i>Alterar</a>
+                                    <a class="btn btn-danger btn-delete" role="button"><i class="glyphicon glyphicon-trash"></i>Excluir</a>
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</div>
+<div id="modal_registrer" class="form-horizontal invisivel" role="dialog">
+    <fieldset>
+        <div class="row">
+            <div class="form-group">
+                @Html.Label("txt_name", "Nome", new { @class = "col-md-3 control-label" })
+                <div class="col-md-9">
+                    @Html.TextBox("txt_name", null, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("cbx_active", "Ativo", new { @class = "col-md-3 control-label" })
+                <div class="col-md-9">
+                    @Html.CheckBox("cbx_active")
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <div class="modal-footer">
+                        <a id="btn_exit" class="btn btn-default" role="button" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i> Sair</a>
+                        <a id="btn_confirm" class="btn btn-primary" role="button"><i class="glyphicon glyphicon-ok"></i> Salvar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</div>
+@section Scripts{
+    <script>
+        function open_form(dados) {
+
+            $('#txt_name').val(dados.Name);
+            $('#cbx_active').prop('checked', dados.Active);
+            var modal_registrer = $('#modal_registrer');
+            bootbox.dialog({
+                title: '@ViewBag.Title',
+                message: modal_registrer
+            })
+            .on('shown.bs.modal', function () {
+                  modal_registrer.show(0, function () {
+                       $('#txt_name').focus()
+                  });
+            })
+            .on('hidden.bs.modal', function () {
+                    modal_registrer.hide().appendTo('body');
+            });
+        }
+
+        $(document).on('click', '#btn_include', function () {
+            open_form({ Id: 0, Name: '', Active: true });
+        })
+            .on('click', '.btn-change', function () {
+                var btn = $(this),
+                    id = btn.closest('tr').attr('data-id'),
+                    url = '@Url.Action("RecoverProductGroup", "Registrer")';
+                    param = { 'id': id };
+
+                $.post(url, param, function (response) {
+                    if (response) {
+                        open_form(response);
+                    }
+                });
+        })
+        .on('click', '.btn-delete', function () {
+            alert('3');
+        })
+
+    </script>
+
+}
 

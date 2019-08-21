@@ -1,4 +1,5 @@
 ﻿using System;
+using ControlStock.Web.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,12 +9,26 @@ namespace ControlStock.Web.Controllers
 {
     public class RegistrerController : Controller
     {
+        private static List<ProductGroupModel> _listProductGroup = new List<ProductGroupModel>()
+        {
+            new ProductGroupModel() { Id = 1, Name="Livros", Active=true, },
+            new ProductGroupModel() { Id = 2, Name = "Cadernos", Active = true, },
+            new ProductGroupModel() { Id = 3, Name = "Pelu", Active = false, }
+        };
+
         [Authorize]
         public ActionResult ProductGroup()
         {
-            return View();
+            return View(_listProductGroup);
         }
+        [HttpPost]
         [Authorize]
+        public ActionResult RecoverProductGroup( int id)
+        {
+            return Json(_listProductGroup.Find(x => x.Id == id));
+        }
+
+        
         public ActionResult ProductBrand()
         {
             return View();
