@@ -73,6 +73,7 @@
         </div>
     </section>
 </div>
+@Html.Hidden("id_registrer")
 <div id="modal_registrer" class="form-horizontal invisivel" role="dialog">
     <fieldset>
         <div class="row">
@@ -104,7 +105,7 @@
 @section Scripts{
     <script>
         function open_form(dados) {
-
+            $('#id_registrer').val(dados.Id);
             $('#txt_name').val(dados.Name);
             $('#cbx_active').prop('checked', dados.Active);
             var modal_registrer = $('#modal_registrer');
@@ -122,6 +123,20 @@
             });
         }
 
+        function create_line_grid(dados)
+        {
+            var ret =
+                '<tr data-id=' + dados.Id + '>' +
+                '<td>' + dados.Name + '</td>' +
+                '<td>' + (dados.Active ? 'SIM' : 'NÃO') + '</td>' +
+                '<td>' +
+                '<a class="btn btn-primary btn-change" role="button" style="margin-right: 3px"><i class="glyphicon glyphicon-pencil"></i> Alterar</a>' +
+                '<a class="btn btn-danger btn-delete" role="button"><i class="glyphicon glyphicon-trash"></i> Excluir</a>' +
+                '</td>' +
+                '</tr>';
+            return ret;
+        }
+
         $(document).on('click', '#btn_include', function () {
             open_form({ Id: 0, Name: '', Active: true });
         })
@@ -136,10 +151,67 @@
                         open_form(response);
                     }
                 });
-        })
-        .on('click', '.btn-delete', function () {
-            alert('3');
-        })
+            })
+            .on('click', '.btn-delete', function () {
+
+                var btn = $(this),
+                    tr = btn.closest('tr'),
+                    id = tr.attr('data-id'),
+                    url = '@Url.Action("RemoveProductGroup", "Registrer")';
+                    param = { 'id': id };
+
+                bootbox.confirm({
+                    message: "Realmente deseja excluir ?",
+                    buttons: {
+                        confirm: {
+                            label: 'Sim',
+                            className: 'btn-success'
+                        },
+                        cancel: {
+                            label: 'Não',
+                            className: 'btn-danger'
+                        }
+                    },
+                    callback: function (result) {
+                        if (result) {
+                            $.post(url, param, function (response) {
+                                if (response) {
+                                    tr.remove();
+                                }
+                            });
+                        }
+                    }
+                });
+            })
+            .on('click', '#btn_confirm', function () {
+                var btn = $(this),
+                url = '@Url.Action("SaveProductGroup", "Registrer")';
+                param = {
+                    Id: $('#id_registrer').val(),
+                    Name: $('#txt_name').val(),
+                    Active: $('#cbx_active').prop('checked')
+                };
+                $.post(url, param, function (response) {
+                    if (response)
+                    {
+                        if (param.Id == 0)
+                        {
+                            var table = $('#registrer_grid').find('tbody'),
+                                line = create_line_grid(response);
+
+                            table.append(line);
+                        }
+                        else
+                        {
+                            var line = $('#registrer_grid').find('tr[data-id=' + param.Id + ']').find('td');
+                            line
+                                .eq(0).html(param.Name).end()
+                                .eq(1).html(param.Active ? 'SIM' : 'NÃO');
+                        }
+                        $('#modal_registrer').parents('.bootbox').modal('hide');
+                    }
+                });
+            });
 
     </script>
 

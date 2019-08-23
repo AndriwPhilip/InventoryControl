@@ -28,7 +28,40 @@ namespace ControlStock.Web.Controllers
             return Json(_listProductGroup.Find(x => x.Id == id));
         }
 
-        
+        [HttpPost]
+        [Authorize]
+        public ActionResult RemoveProductGroup(int id)
+        {
+            var ret = false;
+            var registroBD = _listProductGroup.Find(x => x.Id == id);
+            if(registroBD != null)
+            {
+                _listProductGroup.Remove(registroBD);
+                ret = true;
+            }
+            return Json(ret);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult SaveProductGroup(ProductGroupModel model)
+        {
+            var registroBD = _listProductGroup.Find(x => x.Id == model.Id);
+            if(registroBD == null)
+            {
+                registroBD = model;
+                registroBD.Id = _listProductGroup.Max(x => x.Id) + 1;
+                _listProductGroup.Add(registroBD);
+            }
+            else
+            {
+                registroBD.Name = model.Name;
+                registroBD.Active = model.Active;
+            }
+
+            return Json(registroBD);
+        }
+
         public ActionResult ProductBrand()
         {
             return View();
