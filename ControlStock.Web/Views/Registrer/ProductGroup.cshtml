@@ -75,6 +75,7 @@
 </div>
 @Html.Hidden("id_registrer")
 <div id="modal_registrer" class="form-horizontal invisivel" role="dialog">
+    <div id="msg_mensagem_aviso" class="text-danger invisivel"></div>
     <fieldset>
         <div class="row">
             <div class="form-group">
@@ -97,6 +98,8 @@
                         <a id="btn_exit" class="btn btn-default" role="button" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i> Sair</a>
                         <a id="btn_confirm" class="btn btn-primary" role="button"><i class="glyphicon glyphicon-ok"></i> Salvar</a>
                     </div>
+                    <div id="msg_aviso" class="alert alert-warning invisivel">Falta preencher os campos acima</div>
+                    <div id="msg_erro" class="alert alert-danger invisivel"> Ocorreu um ERRO!</div>
                 </div>
             </div>
         </div>
@@ -108,7 +111,14 @@
             $('#id_registrer').val(dados.Id);
             $('#txt_name').val(dados.Name);
             $('#cbx_active').prop('checked', dados.Active);
+
             var modal_registrer = $('#modal_registrer');
+
+            $('#msg_mensagem_aviso').empty();
+            $('#msg_aviso').hide();
+            $('#msg_mensagem_aviso').hide();
+            $('#msg_erro').hide();
+
             bootbox.dialog({
                 title: '@ViewBag.Title',
                 message: modal_registrer
@@ -192,17 +202,15 @@
                     Active: $('#cbx_active').prop('checked')
                 };
                 $.post(url, param, function (response) {
-                    if (response)
-                    {
-                        if (param.Id == 0)
-                        {
+                    if (response.Resultado == "OK") {
+                        if (param.Id == 0) {
+                            param.Id = response.IDSalvo;
                             var table = $('#registrer_grid').find('tbody'),
-                                line = create_line_grid(response);
+                                line = create_line_grid(param);
 
                             table.append(line);
                         }
-                        else
-                        {
+                        else {
                             var line = $('#registrer_grid').find('tr[data-id=' + param.Id + ']').find('td');
                             line
                                 .eq(0).html(param.Name).end()
@@ -210,9 +218,29 @@
                         }
                         $('#modal_registrer').parents('.bootbox').modal('hide');
                     }
+                    else if (response.Resultado == "ERRO") {
+                        $('#msg_aviso').hide();
+                        $('#msg_mensagem_aviso').hide();
+                        $('#msg_erro').show();
+
+                    }
+                    else if (response.Resultado == "AVISO") {
+                       
+                        $('#msg_mensagem_aviso').html(format_message_warning(response.Mensagens));
+                        $('#msg_aviso').show();
+                        $('#msg_mensagem_aviso').show();
+                        $('#msg_erro').hide();
+                    }
                 });
             });
-
+        function format_message_warning(messages) {
+            var ret = '';
+            for (var i = 0; i < messages.length; i++)
+            {
+                ret += '<li>' + messages[i] + '</li>';
+            }
+            return '<ul>' + ret + '</ul>';
+        }
     </script>
 
 }

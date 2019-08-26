@@ -46,20 +46,39 @@ namespace ControlStock.Web.Controllers
         [Authorize]
         public ActionResult SaveProductGroup(ProductGroupModel model)
         {
-            var registroBD = _listProductGroup.Find(x => x.Id == model.Id);
-            if(registroBD == null)
+            var result = "OK";
+            var message = new List<string>();
+            var idSave = string.Empty;
+
+            if (!ModelState.IsValid)
             {
-                registroBD = model;
-                registroBD.Id = _listProductGroup.Max(x => x.Id) + 1;
-                _listProductGroup.Add(registroBD);
+                result = "AVISO";
+                message = ModelState.Values.SelectMany(x => x.Errors).Select(x => x.ErrorMessage).ToList();
             }
             else
             {
-                registroBD.Name = model.Name;
-                registroBD.Active = model.Active;
+                try
+                {
+                    var registroBD = _listProductGroup.Find(x => x.Id == model.Id);
+                    if (registroBD == null)
+                    {
+                        registroBD = model;
+                        registroBD.Id = _listProductGroup.Max(x => x.Id) + 1;
+                        _listProductGroup.Add(registroBD);
+                    }
+                    else
+                    {
+                        registroBD.Name = model.Name;
+                        registroBD.Active = model.Active;
+                    }
+                }
+                catch(Exception e)
+                {
+                    result = "ERRO";
+                }
+                
             }
-
-            return Json(registroBD);
+            return Json(new { Resultado = result, Mensagens = message, IDSalvo = idSave });
         }
 
         public ActionResult ProductBrand()
