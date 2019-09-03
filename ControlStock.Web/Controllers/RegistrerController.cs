@@ -9,37 +9,25 @@ namespace ControlStock.Web.Controllers
 {
     public class RegistrerController : Controller
     {
-        private static List<ProductGroupModel> _listProductGroup = new List<ProductGroupModel>()
-        {
-            new ProductGroupModel() { Id = 1, Name="Livros", Active=true, },
-            new ProductGroupModel() { Id = 2, Name = "Cadernos", Active = true, },
-            new ProductGroupModel() { Id = 3, Name = "Pelu", Active = false, }
-        };
 
         [Authorize]
         public ActionResult ProductGroup()
         {
-            return View(_listProductGroup);
+            return View(ProductGroupModel.RecoverList());
         }
+
         [HttpPost]
         [Authorize]
-        public ActionResult RecoverProductGroup( int id)
+        public ActionResult RecoverProductGroup(int id)
         {
-            return Json(_listProductGroup.Find(x => x.Id == id));
+            return Json(ProductGroupModel.RecoverById(id));
         }
 
         [HttpPost]
         [Authorize]
         public ActionResult RemoveProductGroup(int id)
         {
-            var ret = false;
-            var registroBD = _listProductGroup.Find(x => x.Id == id);
-            if(registroBD != null)
-            {
-                _listProductGroup.Remove(registroBD);
-                ret = true;
-            }
-            return Json(ret);
+            return Json(ProductGroupModel.RemoveById(id));
         }
 
         [HttpPost]
@@ -48,7 +36,7 @@ namespace ControlStock.Web.Controllers
         {
             var result = "OK";
             var message = new List<string>();
-            var idSave = string.Empty;
+            var idSalvo = string.Empty;
 
             if (!ModelState.IsValid)
             {
@@ -59,26 +47,24 @@ namespace ControlStock.Web.Controllers
             {
                 try
                 {
-                    var registroBD = _listProductGroup.Find(x => x.Id == model.Id);
-                    if (registroBD == null)
+                    var id = model.Save();
+                    if (id > 0)
                     {
-                        registroBD = model;
-                        registroBD.Id = _listProductGroup.Max(x => x.Id) + 1;
-                        _listProductGroup.Add(registroBD);
+                        idSalvo = id.ToString();
                     }
                     else
                     {
-                        registroBD.Name = model.Name;
-                        registroBD.Active = model.Active;
+                        result = "ERRO";
                     }
+
                 }
-                catch(Exception e)
+                catch (Exception ex)
                 {
                     result = "ERRO";
                 }
-                
+
             }
-            return Json(new { Resultado = result, Mensagens = message, IDSalvo = idSave });
+            return Json(new { Resultado = result, Mensagens = message, IdSalvo = idSalvo });
         }
 
         public ActionResult ProductBrand()
