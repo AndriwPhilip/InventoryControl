@@ -120,19 +120,19 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\GraphicsController.cs" />
+    <Compile Include="Controllers\GraficoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\OperationController.cs" />
-    <Compile Include="Controllers\ProfileController.cs" />
-    <Compile Include="Controllers\RegistrerController.cs" />
-    <Compile Include="Controllers\ReportingController.cs" />
+    <Compile Include="Controllers\OperacaoController.cs" />
+    <Compile Include="Controllers\ContaController.cs" />
+    <Compile Include="Controllers\CadastroController.cs" />
+    <Compile Include="Controllers\RelatorioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\CriptoHelper.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
-    <Compile Include="Models\ProductGroupModel.cs" />
-    <Compile Include="Models\UserModel.cs" />
+    <Compile Include="Models\GrupoProdutoModel.cs" />
+    <Compile Include="Models\UsuarioModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -172,19 +172,19 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Sobre.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Registrer\ProductGroup.cshtml" />
-    <Content Include="Views\Registrer\ProductBrand.cshtml" />
-    <Content Include="Views\Registrer\Providers.cshtml" />
-    <Content Include="Views\Registrer\States.cshtml" />
-    <Content Include="Views\Registrer\Cities.cshtml" />
-    <Content Include="Views\Registrer\Countries.cshtml" />
-    <Content Include="Views\Registrer\Products.cshtml" />
-    <Content Include="Views\Registrer\UnitsofMeasure.cshtml" />
-    <Content Include="Views\Registrer\StorageLocations.cshtml" />
-    <Content Include="Views\Registrer\UsersProfile.cshtml" />
-    <Content Include="Views\Registrer\Users.cshtml" />
+    <Content Include="Views\Cadastro\GrupoProduto.cshtml" />
+    <Content Include="Views\Cadastro\ProductBrand.cshtml" />
+    <Content Include="Views\Cadastro\Providers.cshtml" />
+    <Content Include="Views\Cadastro\States.cshtml" />
+    <Content Include="Views\Cadastro\Cities.cshtml" />
+    <Content Include="Views\Cadastro\Countries.cshtml" />
+    <Content Include="Views\Cadastro\Products.cshtml" />
+    <Content Include="Views\Cadastro\UnitsofMeasure.cshtml" />
+    <Content Include="Views\Cadastro\StorageLocations.cshtml" />
+    <Content Include="Views\Cadastro\UsersProfile.cshtml" />
+    <Content Include="Views\Cadastro\Usuario.cshtml" />
     <Content Include="Views\Operation\ProductInput.cshtml" />
     <Content Include="Views\Operation\ProductOutput.cshtml" />
     <Content Include="Views\Operation\Inventory.cshtml" />
@@ -193,7 +193,7 @@
     <Content Include="Views\Graphics\InputVsOutputPerMonth.cshtml" />
     <Content Include="Views\Reporting\InventoryPosition.cshtml" />
     <Content Include="Views\Reporting\Resupply.cshtml" />
-    <Content Include="Views\Profile\Login.cshtml" />
+    <Content Include="Views\Conta\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -4,18 +4,20 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace ControlStock.Web.Models
+namespace ControleEstoque.Web.Models
 {
     public class LoginViewModel
     {
         [Required(ErrorMessage = "Informe o usuário")]
         [Display(Name = "Usuário:")]
-        public string User { get; set; }
+        public string Usuario { get; set; }
+
         [Required(ErrorMessage = "Informe a senha")]
         [DataType(DataType.Password)]
         [Display(Name = "Senha:")]
-        public string Password { get; set; }
+        public string Senha { get; set; }
+
         [Display(Name = "Lembrar Me")]
-        public bool RememberMe { get; set; }
+        public bool LembrarMe { get; set; }
     }
 }

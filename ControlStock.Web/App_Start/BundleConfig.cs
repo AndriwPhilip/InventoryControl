@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace ControlStock.Web
+namespace ControleEstoque.Web
 {
     public class BundleConfig
     {

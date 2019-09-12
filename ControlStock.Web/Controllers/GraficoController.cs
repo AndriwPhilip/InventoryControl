@@ -4,18 +4,18 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace ControlStock.Web.Controllers
+namespace ControleEstoque.Web.Controllers
 {
-    public class GraphicsController : Controller
+    public class GraficoController : Controller
     {
-        // GET: Graphics
         [Authorize]
-        public ActionResult LossesPerMonth()
+        public ActionResult PerdaMes()
         {
             return View();
         }
+
         [Authorize]
-        public ActionResult InputVsOutputPerMonth()
+        public ActionResult EntradaSaidaMesa()
         {
             return View();
         }

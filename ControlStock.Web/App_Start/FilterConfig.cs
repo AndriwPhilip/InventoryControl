@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 
-namespace ControlStock.Web
+namespace ControleEstoque.Web
 {
     public class FilterConfig
     {

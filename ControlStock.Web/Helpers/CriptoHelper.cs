@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Security.Cryptography;
 using System.Text;
+using System.Web;
 
-namespace ControlStock.Web.Helpers
+namespace ControleEstoque.Web
 {
     public static class CriptoHelper
     {
@@ -20,6 +20,7 @@ namespace ControlStock.Web.Helpers
             {
                 ret += hash[i].ToString("x2");
             }
+
             return ret;
         }
     }

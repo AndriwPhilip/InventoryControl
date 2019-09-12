@@ -1,4 +1,4 @@
-﻿using ControlStock.Web.Models;
+﻿using ControleEstoque.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,11 +6,11 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 
-namespace ControlStock.Web.Controllers
+namespace ControleEstoque.Web.Controllers
 {
-    public class ProfileController : Controller
+    public class ContaController : Controller
     {
-       [AllowAnonymous]
+        [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
@@ -26,12 +26,12 @@ namespace ControlStock.Web.Controllers
                 return View(login);
             }
 
-            var achou = UserModel.ValidateUser(login.User, login.Password);
+            var usuario = UsuarioModel.ValidarUsuario(login.Usuario, login.Senha);
 
-            if(achou)
+            if (usuario != null)
             {
-                FormsAuthentication.SetAuthCookie(login.User, login.RememberMe);
-                if(Url.IsLocalUrl(returnUrl))
+                FormsAuthentication.SetAuthCookie(usuario.Nome, login.LembrarMe);
+                if (Url.IsLocalUrl(returnUrl))
                 {
                     return Redirect(returnUrl);
                 }
@@ -42,8 +42,9 @@ namespace ControlStock.Web.Controllers
             }
             else
             {
-                ModelState.AddModelError("", "Login inválido");
+                ModelState.AddModelError("", "Login inválido.");
             }
+
             return View(login);
         }
 

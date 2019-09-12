@@ -4,28 +4,30 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace ControlStock.Web.Controllers
+namespace ControleEstoque.Web.Controllers
 {
-    public class OperationController : Controller
+    public class OperacaoController : Controller
     {
-        // GET: Operation
         [Authorize]
-        public ActionResult ProductInput()
+        public ActionResult EntradaEstoque()
         {
             return View();
         }
+
         [Authorize]
-        public ActionResult ProductOutput()
+        public ActionResult SaidaEstoque()
         {
             return View();
         }
+
         [Authorize]
-        public ActionResult LossRelease()
+        public ActionResult LancPerdaProduto()
         {
             return View();
         }
+
         [Authorize]
-        public ActionResult Inventory()
+        public ActionResult Inventario()
         {
             return View();
         }

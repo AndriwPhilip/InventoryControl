@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29102.190
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.779
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlStock.Web", "ControlStock.Web\ControlStock.Web.csproj", "{988B99A0-6A31-48AF-8324-349D1253EC9D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControleEstoque.Web", "ControlStock.Web\ControleEstoque.Web.csproj", "{988B99A0-6A31-48AF-8324-349D1253EC9D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

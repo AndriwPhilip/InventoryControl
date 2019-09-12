@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace ControlStock.Web.Controllers
+namespace ControleEstoque.Web.Controllers
 {
     public class HomeController : Controller
     {
@@ -13,11 +13,11 @@ namespace ControlStock.Web.Controllers
         {
             return View();
         }
+
         [Authorize]
-        public ActionResult About()
-        {           
+        public ActionResult Sobre()
+        {
             return View();
         }
-                
     }
 }

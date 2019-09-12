@@ -4,18 +4,18 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace ControlStock.Web.Controllers
+namespace ControleEstoque.Web.Controllers
 {
-    public class ReportingController : Controller
+    public class RelatorioController : Controller
     {
-        // GET: Reporting
         [Authorize]
-        public ActionResult InventoryPosition()
+        public ActionResult PosicaoEstoque()
         {
             return View();
         }
+
         [Authorize]
-        public ActionResult Resupply()
+        public ActionResult Ressuprimento()
         {
             return View();
         }
