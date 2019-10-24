@@ -12,10 +12,8 @@ namespace ControleEstoque.Web.Controllers
         private const int _quantMaxLinhasPorPagina = 5;
         private const string _senhaPadrao = "{$127;$188}";
 
-     
         public ActionResult Index()
         {
-           
             ViewBag.SenhaPadrao = _senhaPadrao;
             ViewBag.ListaTamPag = new SelectList(new int[] { _quantMaxLinhasPorPagina, 10, 15, 20 }, _quantMaxLinhasPorPagina);
             ViewBag.QuantMaxLinhasPorPagina = _quantMaxLinhasPorPagina;
@@ -31,17 +29,15 @@ namespace ControleEstoque.Web.Controllers
         }
 
         [HttpPost]
-      
         [ValidateAntiForgeryToken]
-        public JsonResult UsuarioPagina(int pagina, int tamPag)
+        public JsonResult UsuarioPagina(int pagina, int tamPag, string filtro)
         {
-            var lista = UsuarioModel.RecuperarLista(pagina, tamPag);
+            var lista = UsuarioModel.RecuperarLista(pagina, tamPag, filtro);
 
             return Json(lista);
         }
 
         [HttpPost]
-      
         [ValidateAntiForgeryToken]
         public ActionResult RecuperarUsuario(int id)
         {
@@ -49,7 +45,6 @@ namespace ControleEstoque.Web.Controllers
         }
 
         [HttpPost]
-      
         [ValidateAntiForgeryToken]
         public ActionResult ExcluirUsuario(int id)
         {
@@ -57,7 +52,6 @@ namespace ControleEstoque.Web.Controllers
         }
 
         [HttpPost]
-     
         [ValidateAntiForgeryToken]
         public ActionResult SalvarUsuario(UsuarioModel model)
         {

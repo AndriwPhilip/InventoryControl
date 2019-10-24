@@ -2,6 +2,7 @@
 @{
     Layout = "~/Views/Shared/_Cadastro.cshtml";
     ViewBag.Title = "Grupo de Perfis";
+    ViewBag.Lista = Model;
 }
 
 @section Styles {
@@ -84,6 +85,7 @@
         var url_confirmar = '@Url.Action("SalvarPerfil", "CadPerfil")';
         var url_page_click = '@Url.Action("PerfilPagina", "CadPerfil")';
         var url_tam_pag_change = '@Url.Action("PerfilPagina", "CadPerfil")';
+        var url_filtro_change  = '@Url.Action("PerfilPagina", "CadPerfil")';
         var url_alterar = '@Url.Action("RecuperarPerfil", "CadPerfil")';
     </script>
     <script src="~/Scripts/Cadastro/Perfil.js"></script>
