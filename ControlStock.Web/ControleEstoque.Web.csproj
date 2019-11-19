@@ -120,9 +120,12 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\Cadastro\CadCidadeController.cs" />
+    <Compile Include="Controllers\Cadastro\CadEstadoController.cs" />
     <Compile Include="Controllers\Cadastro\CadGrupoProdutoController.cs" />
     <Compile Include="Controllers\Cadastro\CadLocalArmazenamentoController.cs" />
     <Compile Include="Controllers\Cadastro\CadMarcaProdutoController.cs" />
+    <Compile Include="Controllers\Cadastro\CadPaisController.cs" />
     <Compile Include="Controllers\Cadastro\CadPerfilController.cs" />
     <Compile Include="Controllers\Cadastro\CadUnidadeMedidaController.cs" />
     <Compile Include="Controllers\Cadastro\CadUsuarioController.cs" />
@@ -136,6 +139,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\CriptoHelper.cs" />
+    <Compile Include="Models\CidadeModel.cs" />
+    <Compile Include="Models\PaisModel.cs" />
+    <Compile Include="Models\EstadoModel.cs" />
     <Compile Include="Models\LocalArmazenamentoModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\GrupoProdutoModel.cs" />
@@ -152,6 +158,9 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Cadastro\Cidade.css" />
+    <Content Include="Content\Cadastro\Estado.css" />
+    <Content Include="Content\Cadastro\Pais.css" />
     <Content Include="Content\Cadastro\GrupoProduto.css" />
     <Content Include="Content\Cadastro\LocalArmazenamento.css" />
     <Content Include="Content\Cadastro\MarcaProduto.css" />
@@ -159,6 +168,9 @@
     <Content Include="Content\Cadastro\UnidadeMedida.css" />
     <Content Include="Content\Cadastro\Usuario.css" />
     <Content Include="Content\sweetalert2.min.css" />
+    <Content Include="Scripts\Cadastro\Cidade.js" />
+    <Content Include="Scripts\Cadastro\Estado.js" />
+    <Content Include="Scripts\Cadastro\Pais.js" />
     <Content Include="Scripts\sweetalert2.min.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -206,11 +218,7 @@
     <Content Include="Views\CadGrupoProduto\Index.cshtml" />
     <Content Include="Views\Cadastro\ProductBrand.cshtml" />
     <Content Include="Views\Cadastro\Providers.cshtml" />
-    <Content Include="Views\Cadastro\States.cshtml" />
-    <Content Include="Views\Cadastro\Cities.cshtml" />
-    <Content Include="Views\Cadastro\Countries.cshtml" />
     <Content Include="Views\Cadastro\Products.cshtml" />
-    <Content Include="Views\Cadastro\StorageLocations.cshtml" />
     <Content Include="Views\CadUsuario\Index.cshtml" />
     <Content Include="Views\Operation\ProductInput.cshtml" />
     <Content Include="Views\Operation\ProductOutput.cshtml" />
@@ -226,6 +234,9 @@
     <Content Include="Views\CadPerfil\Index.cshtml" />
     <Content Include="Views\CadLocalArmazenamento\Index.cshtml" />
     <Content Include="Views\CadMarcaProduto\Index.cshtml" />
+    <Content Include="Views\CadEstado\Index.cshtml" />
+    <Content Include="Views\CadCidade\Index.cshtml" />
+    <Content Include="Views\CadPais\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
